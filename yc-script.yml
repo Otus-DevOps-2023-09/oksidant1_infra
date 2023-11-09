@@ -1,0 +1,24 @@
+#cloud-config
+users:
+  - name: yc-user
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQdPHNuuJXwjixvKK+qgpVgVy9EN+9BAV9kPr1jn/3HmizXY+HJ08mSTtSiPbIz30CFSrYVhllLlKS/fFiUHqhT/igwaduD5ywI1lLoTekc4v+8pxx3i2O8axZUkSzzDAAMD5XDoIz/EHf+i9oCnp+rOyhbGxDZkhugiVOlyjYHJP+P7KqMs5uRF/bVHyLoN1dv9/QPNKEAdrYRCQC8myyuRrbHGm3bV4BN0B2WJ872KPaJttjY8LqcpLQubVoUP1AP4kCsgjQHBCGR4tvvEwMkZIwp2dg34/sfFvIsMFQfY1n0BsvFwtlG3XjcjXwnLQWVjz1jKTBfEY1qJTtbHBdgFKltsH+LBYNDHFUW/wz7n952KXDQDlo0uRLopjlsHZUhamb8cM3yVRiMUBXX5ePr4r7sjb+XxsywBIsKskb7vOcLpbDXAEw73miO0SNuRy6jEjb6/iB9ZJQPNaH/RjEjtjpIcLJ5ZKnr7tP5DtuZfc4SZD7ZGQ+IR0jDLRQol8= otus-key@oksidant1
+package_update: true
+packages:
+  - ruby-full
+  - ruby-bundler
+  - build-essential
+  - mongodb
+  - git
+runcmd:
+  - echo "==============================================================="
+  - echo "git clone"
+  - su - yc-user -c "git clone -b monolith https://github.com/express42/reddit.git"
+  - echo "==============================================================="
+  - echo "bundle install"
+  - su - yc-user -c "cd reddit && bundle install"
+  - echo "==============================================================="
+  - echo "puma -d"
+  - su - yc-user -c "puma -d --dir ~/reddit/"
