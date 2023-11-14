@@ -1,0 +1,39 @@
+{
+	"builders": [{
+			"type": "yandex",
+			"service_account_key_file": "{{ user `path_key_file` }}",
+			"folder_id": "{{ user `f_id` }}",
+			"source_image_family": "{{ user `sif` }}",
+			"image_name": "{{ user `image` }}-{{timestamp}}",
+			"image_family": "{{ user `image` }}",
+			"ssh_username": "ubuntu",
+			"platform_id": "standard-v1",
+			"use_ipv4_nat": "true"
+		}
+	],
+	"provisioners": [{
+			"type": "shell",
+			"inline": [
+				"sudo apt update",
+				"sleep 10",
+				"sudo apt install -y ruby-full ruby-bundler build-essential",
+				"sudo apt install -y mongodb",
+				"sudo apt install -y git",
+				"git clone -b monolith https://github.com/express42/reddit.git",
+				"cd reddit/",
+				"bundle install",
+				"puma -d"
+			]
+		}, {
+			"type": "file",
+			"source": "scripts/monolith-reddit.service",
+			"destination": "/tmp/monolith-reddit.service"
+		}, {
+			"type": "shell",
+			"inline": [
+				"sudo mv /tmp/monolith-reddit.service /etc/systemd/system/monolith-reddit.service",
+				"sudo systemctl enable monolith-reddit"
+			]
+		}
+	]
+}

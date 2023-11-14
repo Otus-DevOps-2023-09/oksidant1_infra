@@ -1,0 +1,15 @@
+[Unit]
+Description=Monolith Reddit application
+After=syslog.target network.target remote-fs.target nss-lookup.target mongodb.target
+
+[Service]
+Type=forking
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/reddit/
+ExecStart=/usr/local/bin/puma -d --dir /home/ubuntu/reddit --pidfile /tmp/monolith-reddit.pid
+ExecStartPost=/bin/sleep 1
+PIDFile=/tmp/monolith-reddit.pid
+
+[Install]
+WantedBy=multi-user.target
