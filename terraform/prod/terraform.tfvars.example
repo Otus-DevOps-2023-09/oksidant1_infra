@@ -1,0 +1,8 @@
+cloud_id                 = "b1go"
+folder_id                = "b1ff"
+zone                     = "ru-central1-a"
+image_id                 = "fddo"
+subnet_id                = "e9gvj"
+public_key_path          = "~/.ssh/id_rsa.pub"
+privat_key_path          = "~/.ssh/id_rsa"
+service_account_key_file = "~/key.json"
