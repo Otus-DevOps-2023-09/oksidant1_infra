@@ -1,6 +1,6 @@
 {
     "f_id": "b1a11ohacnaa1aa1u1aa",
     "sif": "ubuntu-1604-lts",
-    "path_key_file": "key.json",
+    "path_key_file": "packer/key.json",
     "image": "reddit-base"
 }
