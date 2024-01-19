@@ -1,7 +1,7 @@
 {
     "f_id": "b1g69ohdcnpa8ng4u1ff",
     "sif": "ubuntu-1604-lts",
-    "path_key_file": "key.json",
+    "path_key_file": "/home/ae/otus/packer/full-image/key.json",
     "image": "reddit-app"
 }
 

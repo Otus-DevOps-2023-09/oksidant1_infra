@@ -6,3 +6,4 @@
 terraform.tfvars
 */packer/variables.json
 */packer/key.json
+*.retry
