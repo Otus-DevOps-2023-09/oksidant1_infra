@@ -7,3 +7,10 @@ terraform.tfvars
 */packer/variables.json
 */packer/key.json
 *.retry
+# Vagrant & molecule
+.vagrant/
+*.log
+*.pyc
+.molecule
+.cache
+.pytest_cache
